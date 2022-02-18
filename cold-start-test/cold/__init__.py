@@ -15,9 +15,14 @@ def create_app():
     # ORM
     db.init_app(app)
     migrate.init_app(app, db)
+    from .models import user
 
-    from .routes import main_routes
+    from .routes import main as main_routes
+    from .routes import users as users_routes
+    from .routes import health as health_routes
 
     app.register_blueprint(main_routes.bp)
+    app.register_blueprint(users_routes.bp)
+    app.register_blueprint(health_routes.bp)
 
     return app
